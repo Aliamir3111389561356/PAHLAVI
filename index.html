@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>PAHLAVI DNS PANEL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Tahoma', sans-serif;
+      direction: rtl;
+      background: linear-gradient(to right, red 33%, purple 33%, white 34%);
+      padding: 20px;
+      color: #fff;
+      text-align: center;
+    }
+    .form-box {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 25px;
+      border-radius: 15px;
+      margin: 20px auto;
+      max-width: 500px;
+    }
+    input, select, button {
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+    }
+    .copy-btn {
+      background-color: yellow;
+      color: black;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .footer {
+      margin-top: 40px;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-box">
+  <h2>ورود به پنل PAHLAVI</h2>
+  <input type="text" id="username" placeholder="نام کاربری">
+  <input type="password" id="password" placeholder="رمز عبور">
+  <button onclick="login()">ورود</button>
+</div>
+
+<div class="form-box" id="main" style="display:none;">
+  <h2>درخواست DNS VIP</h2>
+  <select id="country">
+    <option>ایران</option>
+    <option>ترکیه</option>
+    <option>امارات</option>
+  </select>
+  <select id="type">
+    <option>DNS VIP</option>
+    <option>DNS طلا</option>
+    <option>DNS نقره</option>
+    <option>DNS مناطق جنگ‌زده</option>
+  </select>
+  <input type="text" id="size" placeholder="حجم دی‌ان‌اس (مثلاً 5GB)">
+  <input type="text" id="days" placeholder="مدت زمان (روز)">
+  <button onclick="sendToBot()">درخواست ساخت DNS</button>
+</div>
+
+<div class="footer">
+  خز شده در چنل Pahlavi_x6
+</div>
+
+<script>
+  function login() {
+    const u = document.getElementById("username").value;
+    const p = document.getElementById("password").value;
+    if (u === "Pahlavi" && p === "Pahlavi_x6") {
+      document.querySelectorAll('.form-box')[0].style.display = 'none';
+      document.getElementById("main").style.display = 'block';
+    } else {
+      alert("نام کاربری یا رمز عبور اشتباه است");
+    }
+  }
+
+  function sendToBot() {
+    const country = document.getElementById("country").value;
+    const type = document.getElementById("type").value;
+    const size = document.getElementById("size").value;
+    const days = document.getElementById("days").value;
+
+    const message = `درخواست DNS:\nکشور: ${country}\nنوع: ${type}\nحجم: ${size}\nمدت: ${days}`;
+    const token = "8138490091:AAE0sTFAH59tS4ZM9Fp8tMC7eDjQZJOigCM";
+    const chat_id = "7255721745";
+    const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(message)}`;
+
+    fetch(url)
+      .then(response => {
+        if (response.ok) {
+          alert("درخواست با موفقیت ارسال شد! منتظر دریافت DNS از ربات باشید.");
+        } else {
+          alert("ارسال ناموفق بود!");
+        }
+      });
+  }
+</script>
+
+</body>
+    </html>
